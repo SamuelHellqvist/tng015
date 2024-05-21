@@ -1,0 +1,153 @@
+t = 0:0.001:2;
+
+x_storn = sin(2*pi*50.*t); % Skapa störning 50 Hz
+
+x_storn2 = 0.6*sin(2*pi*50.5.*t + pi/7); % Skapa approx. av störningen
+
+x_signal = sin(2*pi*30.*t); % Skapa signal 30 Hz
+
+x_bland =x_storn + x_signal; % Blanda
+
+P = con2seq(x_storn2); % Indata till adaptivt filter
+
+T = con2seq(x_bland); % Önskade data (”target”)
+
+pr = [-1 1];
+
+s = 1;
+
+id = [0 1 2 3 4 5 6 7 8 9 10]; % Fördröjningar, 10 stycken, ej 11 !!
+
+lr = 0.05;
+
+net = newlin(pr, s, id, lr);
+
+Pi = {0 0 0 0 0 0 0 0 0 0}; % Obs 10 stycken
+
+passes = 30;
+
+for i = 1:passes;
+
+    [net,y,e,Pf,Af,tr] = adapt(net,P,T,Pi); % Adaptera, tar lite tid !!
+
+end
+
+%Komplettera med utskriftsraderna:
+
+subplot(411); plot(t(1:500),x_signal(1:500)); grid;
+
+subplot(412); plot(t(1:500),x_bland(1:500)); grid;
+
+subplot(413); plot(t(1:500),[e{1:500}]); grid;
+
+subplot(414); plot(t(1:500),[y{1:500}]); grid;
+
+
+%% mindre nätverk
+t = 0:0.001:2;
+
+x_storn = sin(2*pi*50.*t); % Skapa störning 50 Hz
+
+x_storn2 = 0.6*sin(2*pi*50.5.*t + pi/7); % Skapa approx. av störningen
+
+x_signal = sin(2*pi*30.*t); % Skapa signal 30 Hz
+
+x_bland =x_storn + x_signal; % Blanda
+
+P = con2seq(x_storn2); % Indata till adaptivt filter
+
+T = con2seq(x_bland); % Önskade data (”target”)
+
+pr = [-1 1];
+
+s = 1;
+
+id = [0 1 2 3 4 5]; % Fördröjningar, 10 stycken, ej 11 !!
+
+lr = 0.01;
+
+net = newlin(pr, s, id, lr);
+
+Pi = {0 0 0 0 0}; % Obs 10 stycken
+
+passes = 30;
+
+for i = 1:passes;
+
+    [net,y,e,Pf,Af,tr] = adapt(net,P,T,Pi); % Adaptera, tar lite tid !!
+
+end
+
+%Komplettera med utskriftsraderna:
+
+subplot(411); plot(t(1:500),x_signal(1:500)); grid;
+
+subplot(412); plot(t(1:500),x_bland(1:500)); grid;
+
+subplot(413); plot(t(1:500),[e{1:500}]); grid;
+
+subplot(414); plot(t(1:500),[y{1:500}]); grid;
+
+%% upg 8
+t = 0:0.001:2;
+
+x_storn = sin(2*pi*50.*t); % Skapa störning 50 Hz
+
+x_storn2 = 0.6*sin(2*pi*50.5.*t + pi/7); % Skapa approx. av störningen
+
+x_signal = sin(2*pi*30.*t); % Skapa signal 30 Hz
+
+x_bland =x_storn + x_signal; % Blanda
+
+P = con2seq(x_storn2); % Indata till adaptivt filter
+
+T = con2seq(x_bland); % Önskade data (”target”)
+
+pr = [-1 1];
+
+s = 1;
+
+id = [0 1 2 3 4 5 6 7 8 9 10]; % Fördröjningar, 10 stycken, ej 11 !!
+
+lr = 0.01;
+
+net = newlin(pr, s, id, lr);
+
+Pi = {0 0 0 0 0 0 0 0 0 0}; % Obs 10 stycken
+
+passes = 100;
+
+for i = 1:passes
+
+    [net,y,e,Pf,Af,tr] = adapt(net,P,T,Pi); % Adaptera, tar lite tid !!
+
+end
+
+diff = zeros(1, 2001);
+
+for i = 1:2001
+    diff(1:i) = abs(x_signal(1:i) - [e{1:i}]);
+end
+
+quality = mean(diff);
+
+subplot(411); plot(t(1:500),x_signal(1:500)); grid;
+
+subplot(412); plot(t(1:500),x_bland(1:500)); grid;
+
+subplot(413); plot(t(1:500),[e{1:500}]); grid;
+
+subplot(414); plot(t(1:500),[y{1:500}]); grid;
+
+
+%%
+%Komplettera med utskriftsraderna:
+
+subplot(411); plot(t(1:500),x_signal(1:500)); grid;
+
+subplot(412); plot(t(1:500),x_bland(1:500)); grid;
+
+subplot(413); plot(t(1:500),[e{1:500}]); grid;
+
+subplot(414); plot(t(1:500),[y{1:500}]); grid;
+
