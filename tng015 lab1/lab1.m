@@ -74,9 +74,77 @@ deltaf = fs/N;
 %the frequency 523 is withing the range fmax +- deltaf (523 +-1.1024)
 
 %% 9
+load phonenumber.mat
+%soundsc(y,fs); 
+y1=y(1:1000);
+y2=y(1201:2200);
+y3=y(2401:3400);
+y4=y(3601:4600);
+y5=y(4801:5800);
+y6=y(6001:7000);
+y7=y(7201:8198);
 
+subplot(7,1,1);
+Y = fft(y1); %fourier transformerar 
+N = length(Y);
+Y = abs(Y);
+f = 0:(fs/N): fs/2; % nyquist
 
+plot(f, Y(1:length(f)));
 
+subplot(7,1,2);
+Y = fft(y2); %fourier transformerar 
+N = length(Y);
+Y = abs(Y);
+f = 0:(fs/N): fs/2; % nyquist
 
+plot(f, Y(1:length(f)));
 
+subplot(7,1,3);
+Y = fft(y3); %fourier transformerar 
+N = length(Y);
+Y = abs(Y);
+f = 0:(fs/N): fs/2; % nyquist
+
+plot(f, Y(1:length(f)));
+
+subplot(7,1,4);
+Y = fft(y4); %fourier transformerar 
+N = length(Y);
+Y = abs(Y);
+f = 0:(fs/N): fs/2; % nyquist
+
+plot(f, Y(1:length(f)));
+
+subplot(7,1,5);
+Y = fft(y5); %fourier transformerar 
+N = length(Y);
+Y = abs(Y);
+f = 0:(fs/N): fs/2; % nyquist
+
+plot(f, Y(1:length(f)));
+
+subplot(7,1,6);
+Y = fft(y6); %fourier transformerar 
+N = length(Y);
+Y = abs(Y);
+f = 0:(fs/N): fs/2; % nyquist
+
+plot(f, Y(1:length(f)));
+
+subplot(7,1,7);
+Y = fft(y7); %fourier transformerar 
+N = length(Y);
+Y = abs(Y);
+f = 0:(fs/N): fs/2; % nyquist
+
+plot(f, Y(1:length(f)));
+%%
+load radar.mat
+Y = fft(y); %fourier transformerar 
+N = length(Y);
+Y = abs(Y);
+f = 0:(fs/N): fs/2; % nyquist
+
+plot(f, Y(1:length(f)));
 

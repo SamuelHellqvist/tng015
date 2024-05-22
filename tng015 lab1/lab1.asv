@@ -25,7 +25,7 @@ plot(t,y);
 %% 4
 %4.1
 t = 0:0.02:0.8;
-h = exp(-4*t) %kommer fr�n fr�gan h = e^(-4t)
+h = exp(-4*t) %kommer från frågan h = e^(-4t)
 
 
 %4.2
@@ -50,7 +50,7 @@ stem(z);
 [y,fs]=audioread('Trubadur.wav');
 
 %6.2
-d = 0.3*fs; %hur m�nga sampar som visar en delay på 0.3 sekunder
+d = 0.3*fs; %hur många samplar som visar en delay på 0.3 sekunder
 d = round(d);
 zeroes = zeros(1,d);
 h = [1 zeroes 1 zeroes 1];
@@ -74,9 +74,23 @@ deltaf = fs/N;
 %the frequency 523 is withing the range fmax +- deltaf (523 +-1.1024)
 
 %% 9
+load phonenumber.mat
+%soundsc(y,fs); 
+y1=y(1:1000);
+y2=y(1201:2200);
+y3=y(2401:3400);
+y4=y(3601:4600);
+y5=y(4801:5800);
+y6=y(6001:7000);
+y7=y(7201:8198);
 
+%genom att byta yn
+Y = fft(y1); %fourier transformerar 
+N = length(Y);
+Y = abs(Y);
+f = 0:(fs/N): fs/2; % nyquist
 
-
+plot(f, Y(1:length(f)));
 
 
 
